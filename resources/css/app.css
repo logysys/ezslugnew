@@ -1,0 +1,477 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.87 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.87 0 0);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.145 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.145 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+    --border: oklch(0.269 0 0);
+    --input: oklch(0.269 0 0);
+    --ring: oklch(0.439 0 0);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.985 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(0.269 0 0);
+    --sidebar-ring: oklch(0.439 0 0);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* ====================================
+   BEAUTIFUL CUSTOM SCROLLBARS - GLOBAL
+   ==================================== */
+
+/* Main scrollbar for the entire page */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+/* Scrollbar for all div elements */
+div::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* Scrollbar for iframes and embedded content */
+iframe::-webkit-scrollbar,
+model-viewer::-webkit-scrollbar,
+.w-md-editor::-webkit-scrollbar,
+.resizable-content::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: linear-gradient(135deg, rgba(45, 55, 72, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(74, 85, 104, 0.5);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Scrollbar thumb hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+  box-shadow: 
+    0 3px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* Scrollbar thumb active effect */
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar corner */
+::-webkit-scrollbar-corner {
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 0 0 4px 0;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8b5cf6 rgba(30, 41, 59, 0.9);
+}
+
+/* Specific styling for main content area */
+main::-webkit-scrollbar {
+  width: 14px;
+}
+
+main::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, 
+    rgba(15, 23, 42, 0.9) 0%, 
+    rgba(30, 41, 59, 0.9) 50%,
+    rgba(15, 23, 42, 0.9) 100%
+  );
+  border-left: 1px solid rgba(74, 85, 104, 0.3);
+}
+
+main::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, 
+    #8b5cf6 0%, 
+    #7c3aed 30%, 
+    #6d28d9 70%, 
+    #5b21b6 100%
+  );
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Styling for sidebar scrollbars */
+[class*="sidebar"]::-webkit-scrollbar,
+[class*="Sidebar"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+[class*="sidebar"]::-webkit-scrollbar-track,
+[class*="Sidebar"]::-webkit-scrollbar-track {
+  background: rgba(45, 55, 72, 0.7);
+  border-radius: 4px;
+}
+
+[class*="sidebar"]::-webkit-scrollbar-thumb,
+[class*="Sidebar"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 4px;
+}
+
+/* Styling for modal scrollbars */
+[class*="modal"]::-webkit-scrollbar,
+[class*="Modal"]::-webkit-scrollbar {
+  width: 10px;
+}
+
+[class*="modal"]::-webkit-scrollbar-track,
+[class*="Modal"]::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.8);
+  border-radius: 6px;
+}
+
+[class*="modal"]::-webkit-scrollbar-thumb,
+[class*="Modal"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Styling for card/content scrollbars */
+.card::-webkit-scrollbar,
+.resizable-content::-webkit-scrollbar,
+.dark-markdown-preview-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card::-webkit-scrollbar-track,
+.resizable-content::-webkit-scrollbar-track,
+.dark-markdown-preview-wrapper::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.6);
+  border-radius: 3px;
+}
+
+.card::-webkit-scrollbar-thumb,
+.resizable-content::-webkit-scrollbar-thumb,
+.dark-markdown-preview-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  border-radius: 3px;
+}
+
+/* Styling for markdown editor/preview scrollbars */
+.markdown-container::-webkit-scrollbar,
+.wmde-markdown::-webkit-scrollbar,
+.w-md-editor-preview::-webkit-scrollbar,
+.enhanced-md-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.markdown-container::-webkit-scrollbar-track,
+.wmde-markdown::-webkit-scrollbar-track,
+.w-md-editor-preview::-webkit-scrollbar-track,
+.enhanced-md-editor::-webkit-scrollbar-track {
+  background: rgba(26, 32, 44, 0.8);
+}
+
+.markdown-container::-webkit-scrollbar-thumb,
+.wmde-markdown::-webkit-scrollbar-thumb,
+.w-md-editor-preview::-webkit-scrollbar-thumb,
+.enhanced-md-editor::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+/* Smooth scroll behavior for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation for scrollbar thumb */
+@keyframes scrollbarPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Add subtle pulse animation to scrollbar thumb on page load */
+::-webkit-scrollbar-thumb {
+  animation: scrollbarPulse 2s ease-in-out;
+}
+
+/* Hide scrollbar when not interacting (optional) */
+::-webkit-scrollbar {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+:hover::-webkit-scrollbar,
+:focus::-webkit-scrollbar,
+:active::-webkit-scrollbar {
+  opacity: 1;
+}
+
+/* Custom scrollbar for overflow-auto utility classes */
+.overflow-auto::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.overflow-auto::-webkit-scrollbar-track,
+.overflow-y-auto::-webkit-scrollbar-track,
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(75, 85, 99, 0.3);
+  border-radius: 4px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb,
+.overflow-y-auto::-webkit-scrollbar-thumb,
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border-radius: 4px;
+}
+
+/* Special styling for dark mode containers */
+.dark-markdown-preview-wrapper .wmde-markdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-markdown-preview-wrapper .wmde-markdown::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.9);
+}
+
+.dark-markdown-preview-wrapper .wmde-markdown::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+/* Glassmorphism effect for scrollbars in blurry backgrounds */
+.blur-overlay + *::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.blur-overlay + *::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.8) 0%, 
+    rgba(124, 58, 237, 0.8) 100%
+  );
+  backdrop-filter: blur(5px);
+}
+
+/* Responsive scrollbar sizing */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  div::-webkit-scrollbar,
+  iframe::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  main::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+
+/* Print styles - hide scrollbars when printing */
+@media print {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    scrollbar-width: none;
+  }
+}
+
+/* Input number spinner removal */
+.input-no-spinner::-webkit-outer-spin-button,
+.input-no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-no-spinner {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Masonry Grid */
+.my-masonry-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -24px;
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 24px;
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > div {
+  margin-bottom: 24px;
+}
